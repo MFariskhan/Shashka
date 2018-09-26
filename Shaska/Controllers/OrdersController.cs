@@ -8,6 +8,7 @@ using Shaska.ViewModel;
 using System.Data.Entity;
 using Shaska.Models;
 using ZXing;
+using System.IO;
 
 namespace Shaska.Controllers
 {
@@ -154,7 +155,7 @@ namespace Shaska.Controllers
             //barcodeWriter
             // write text and generate a 2-D barcode as a bitmap
             barcodeWriter.Write(id)
-                .Save(@"D:\DATA\MVC Projects\Shaska\Shaska\Images\Order Barcodes\" + id + ".png");
+                .Save(Server.MapPath(@"~/Images/Order Barcodes/" + id + ".png"));
 
             Random RandomKey = new Random();
             int Key = RandomKey.Next(1, 1000);
