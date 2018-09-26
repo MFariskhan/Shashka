@@ -1,0 +1,91 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="id" style="color:red">Orders Details</h2>
+<table id="orders" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Order Posted Time</th>
+            <th>Order Key</th>
+            <th>Status</th>
+            
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+            var table = $("#orders").DataTable({
+                ajax: {
+                    url: "/api/orders/@ViewBag.id",
+                    dataSrc: ""
+                },
+                columns: [
+                  
+                    {
+                        data: "product.productName",
+                        render: function (data, type, order) {
+                            return "<a href='/products/showproduct/" + order.product.productId + "'>" + data + "</a>";
+                        }
+                    },
+                     {
+                         data: "quantity"
+                     },
+
+                      {
+                          data: "orderPostDate",
+
+                      },
+                      {
+                          data: "key",
+
+                      },
+
+                    {
+                        data: "status",
+                       
+                    }
+                                   ]
+            });
+
+            $("#orders").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to remove this order?", function (result) {
+
+                    if (result) {
+                        $.ajax({
+                            url: "/api/orders/" + button.attr("data-id"),
+                           method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+
+                        });
+                    }
+                    });
+            });
+            //
+        /*    $("#confirm").on("click", function () {
+
+                $.ajax({
+
+                    url: "/api/orders/updateOrders/",
+                   method: "PUT",
+                    success: function () {
+                        alert("jaja");
+                    }
+
+                });
+
+
+            });*/
+        });
+    </script>
+}

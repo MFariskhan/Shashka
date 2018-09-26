@@ -1,0 +1,26 @@
+﻿@model Shaska.ViewModel.ProductSizeCategoryViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="padding-left:15px;height:450px">
+<h2>New</h2>
+@using (Html.BeginForm("ProductForm", "Products"))
+{
+   
+<div class="form-group">
+    @Html.LabelFor(m => m.product.ProductCategoryId)
+    @Html.DropDownListFor(m => m.product.ProductCategoryId, new SelectList(Model.productCategory, "Id", "CategoryName"), "Select Category", new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.product.ProductCategoryId)
+</div>
+    @Html.HiddenFor(m => m.product.ProductId)
+    @Html.HiddenFor(m => m.product.ProductCategoryId)
+    @Html.HiddenFor(m => m.product.ProductName)
+    @Html.HiddenFor(m => m.product.Manufacturer)
+    @Html.HiddenFor(m => m.product.ProductPrice)
+    @Html.HiddenFor(m => m.product.ProductDate)
+    @Html.HiddenFor(m => m.product.NoOfSizes)
+
+<button type="submit" class="btn-primary btn">Next</button>
+}
+</div>

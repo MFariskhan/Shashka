@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Shaska.Models.Product>
+@{
+    ViewBag.Title = "ShowProductsByCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 style="padding-left:15px;color:#0066c0">@ViewBag.Name</h2>
+<div class="badge" style="background-color:white">
+    @foreach (var Product in Model)
+    {
+        <a href="/Products/ShowProduct/@Product.ProductId">
+            <div style="height:280px;width:235px;background-color:white;margin:0 0 0 0;padding:0 5px 5px 5px;float:left">
+
+                <div>
+                    <img src="~/Peruploads/@Product.Image[0].ImagePath" style="height:222px;max-width:220px">
+                </div>
+                <div>
+                    <p style="font-size:18px;margin:0 0 0 0;color:#0066c0">@Product.ProductName</p>
+                    <p style="color:firebrick;font-size:14px;margin:0 0 0 0;padding:0 0 0 0">Price: Rs @{@Product.ProductPrice}</p>
+                </div>
+            </div>
+        </a>
+    }
+</div>
+
+
+
+
+@{
+    /*
+<style>
+   .secondpart a:hover
+   {
+        color:white;
+        
+    }
+
+    .mapbox
+{
+    height:400px;
+    float:left;
+    width:20%;
+
+    margin-left:10px;
+    margin-top:10px;
+    
+}
+.map1
+{
+    height:300px;
+background-size:cover;
+}
+.location
+{
+    height:50px;
+        
+    background-color:rgba(0,102,102,1);
+    
+    transition:all 0.5s ease-in-out;
+}
+
+.location:hover
+{
+    background-color:rgba(0,204,255,1);
+    color:white;
+}
+
+.textlocation
+{
+    margin:0;
+    text-align:center;
+    padding-top:12px;
+   
+}
+
+    </style>
+<div class="secondpart" style="height:80%;width:100%;float:left">
+
+    
+   
+    @foreach (var item in Model)
+    {
+        <a href="/Products/ShowProduct/@item.ProductId">
+            <div class="mapbox mapbox1">
+
+                <div class="map map1">
+
+                    @if (item.Image != null && item.Image.Count > 0)
+                    {
+                        <img src="~/Peruploads/@item.Image[0].ImagePath" style="height:300px;width:100%">
+                    }
+                </div>
+
+                <div class="location location1">
+                   
+                    <h4 class="textlocation" style="">@item.ProductName</h4>
+
+                </div>
+
+            </div>
+        </a>
+        
+    }
+</div>
+    */
+}

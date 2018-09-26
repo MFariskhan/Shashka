@@ -1,0 +1,59 @@
+﻿@model Shaska.Models.Product
+@{
+    ViewBag.Title = "UploadImages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Upload Images</h2>
+
+@{
+    @Styles.Render("~/script/css/aurigma.htmluploader.control.css")
+    @Scripts.Render("~/script/aurigma.imageuploaderflash.min.js")
+    @Scripts.Render("~/script/aurigma.htmluploader.control.js")
+}
+
+<script type="text/javascript">
+
+    var uploader = $au.imageUploaderFlash({
+        id: 'Uploader1',
+
+        licenseKey: 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXXX',
+        width: '100%',
+        height: '500px',
+        converters: [
+       { mode: '*.*=SourceFile' }
+        ],
+        uploadSettings: {
+            actionUrl: '@Url.Action("Add", "Products")'
+
+        }
+
+    });
+    uploader.writeHtml();
+</script>
+@using (Html.BeginForm("Finish", "Products", new { id = "finishform" }))
+{
+    @Html.HiddenFor(m => m.ProductId)
+    @Html.HiddenFor(m => m.ProductCategoryId)
+    @Html.HiddenFor(m => m.ProductName)
+    @Html.HiddenFor(m => m.Manufacturer)
+    @Html.HiddenFor(m => m.ProductPrice)
+    @Html.HiddenFor(m => m.ProductDate)
+    @Html.HiddenFor(m => m.NoOfSizes)
+    for (int a = 0; Model.Size != null && a < Model.Size.Count; a++)
+    {
+      @Html.HiddenFor(m => m.Size[a].Sixe)
+    @Html.HiddenFor(m => m.Size[a].ProductId)
+    @Html.HiddenFor(m => m.Size[a].Stock)
+    }
+    for (int a = 0; Model.Image != null && a < Model.Image.Count; a++)
+    {
+        @Html.HiddenFor(m => m.Image[a].ProductId)
+        @Html.HiddenFor(m => m.Image[a].ImagePath)
+    }
+    @Html.AntiForgeryToken()
+    <br>
+    <div class="form-group">
+        <button type="submit" class="btn-primary btn" id="finish">Finish</button>
+        </div>
+        }

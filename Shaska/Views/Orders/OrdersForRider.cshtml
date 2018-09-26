@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "OrdersForRiders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-3 pull-left">
+    <h2 style="color:red">Orders For Rider</h2>
+        </div>
+    <div class="col-sm-1 pull-right" style="padding:20px 0 0 0;margin:0px 20px 0 0;">
+        <a href="/Orders/QRScanner" class="btn btn-primary">Get Orders</a>
+    </div>
+</div>
+<table id="orders" class="table table-bordered table-hover" style="margin:0px auto">
+    <thead>
+        <tr>
+            <th>Order Number</th>
+            <th>Customer Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Order Confirmed By</th>
+            <th>Order Assign To</th>
+            <th>Status</th>
+            <th>Delivered</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<div id="myModal" class="modal" data-backdrop="static" data-keyboard="false" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+               <h4 class="modal-title" style="color:red;">Please enter key that you received by customer</h4>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+                          </div>
+              @using (Html.BeginForm("OrderDelivered", "Orders"))
+              {
+                <div class="modal-body">
+                    <div class="form-group">
+                    @Html.Label("Enter Key:")
+                    @Html.TextBox("Key", null,new { @class = "form-control" } )
+                        @Html.Hidden("Id")
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                <button type="submit" class="btn btn-primary">Enter</button>
+            </div>
+              }
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+           var table= $("#orders").DataTable({
+                ajax: {
+                    url:"/api/orders",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "id"
+                    },
+                    {
+                        data: "applicationUser.firstName"
+                        //render: function (data, type, order) {
+                        //    return "<a href='/orders/details/" + order.applicationUser.id + "'>" + order.applicationUser.firstName+" "+order.applicationUser.lastName + "</a>";
+                        //}
+
+                    },
+                    {
+                        data: "address"
+                    },
+                    {
+                         data: "phoneNumber"
+                    },
+                    {
+                        data: "orderConfirmBy.firstName"
+                    },
+                    {
+                        data: "orderAssignTo.firstName"
+                    },
+                    {
+                       data: "status"
+                    },
+                    {
+                        data: "applicationUserId",
+                        render: function (data, type, order) {
+                            return "<a id='del' class='btn btn-primary' data-toggle='modal' data-target='#myModal' onclick='"+"SetValueInHiddenFeild(\""+data+"\")'>Delivered</a>";
+                        }
+                    }
+
+                ]
+            });
+
+
+
+        });
+        function SetValueInHiddenFeild(UserID)
+        {
+            document.getElementById("Id").value = UserID;
+        }
+    </script>
+
+}

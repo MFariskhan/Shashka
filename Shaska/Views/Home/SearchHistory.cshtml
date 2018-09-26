@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Shaska.Models.Product>
+@{
+    ViewBag.Title = "SearchHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="padding-left:15px;color:red">Search History</h2>
+<div class="badge" style="background-color:white">
+@foreach (var Product in Model)
+{
+    <a href="/Products/ShowProduct/@Product.ProductId">
+        <div style="height:280px;width:235px;background-color:white;margin:0 0 0 0;padding:0 5px 5px 5px;float:left">
+
+            <div>
+                <img src="~/Peruploads/@Product.Image[0].ImagePath" style="height:222px;max-width:220px">
+            </div>
+            <div>
+                <p style="font-size:18px;margin:0 0 0 0;color:#0066c0">@Product.ProductName</p>
+                <p style="color:firebrick;font-size:14px;margin:0 0 0 0;padding:0 0 0 0">Price: Rs @{@Product.ProductPrice}</p>
+            </div>
+        </div>
+    </a>
+}
+</div>

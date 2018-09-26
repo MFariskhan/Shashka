@@ -1,0 +1,171 @@
+﻿@model Shaska.ViewModel.CategoryProductsViewModel
+@{
+	ViewBag.Title = "Home";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div style="margin-bottom:0">
+	<a href="/Home/Departments/3">
+		<img class="mySlides" src="~/Peruploads/coverpics/4.jpg" style="height:260px;width:100%">
+	</a>
+	<a href="/Products/showproductsbycategory/1">
+		<img class="mySlides" src="~/Peruploads/coverpics/7.jpg" style="height:260px;width:100%;display:none">
+	</a>
+	<a href="/Products/showproductsbycategory/3">
+		<img class="mySlides" src="~/Peruploads/coverpics/2.jpg" style="height:260px;width:100%;display:none">
+	</a>
+	<a href="/Products/showproductsbycategory/3">
+		<img class="mySlides" src="~/Peruploads/coverpics/nike.jpg" style="height:260px;width:100%;display:none">
+	</a>
+	<button class="btn w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+	<button class="btn w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+</div>
+
+
+<div class="container" style="margin:0 0 0 0;height:296px;width:100%;background-color:lightgray;padding:8px 0 8px 0;">
+
+	<div style="height:280px;width:235px;background-color:white;margin-left:8px;padding-top:10px;padding-left:10px;float:left">
+		<div class="row ImageAndName">
+			<a href="/Manage">
+				<div class="col-sm-3">
+					<img src="~/Peruploads/coverpics/logo.png">
+				</div>
+			</a>
+				<div class="col-sm-3" style="height:45px;width:175px">
+					<p style="color: #002e36 !important;font-size:18px">Hi, @Model.UserName</p>
+				</div>
+</div>
+		<div class="divider" style="width:45px;margin-top :15px"></div>
+		<p style="color:#879596 !important;font-size:13px;margin:0px">YOUR ORDERS</p>
+		<a style="color: #002e36 !important;font-size:13px;margin:0px" href="/Orders/Details/@Model.UserId">0 recent orders</a>
+		<div class="divider" style="width:45px;margin-top :50px"></div>
+		<p style="color:#879596 !important;font-size:13px;margin:0px">YOUR SEARCH HISTORY</p>
+		<a style="color: #002e36 !important;font-size:13px;margin:0px" href="/Home/SearchHistory/@Model.UserId">recent history</a>
+	</div>
+
+	@for (int c = 0; c < 4; c++)
+	{
+		<a href="/Products/ShowProductsByCategory/@Model.CategoriesProductViewModel[c].ProductCategory.Id">
+			<div style="height:280px;width:235px;background-color:white;margin-left:8px;margin-top:0;padding:5px 5px 5px 5px;float:left">
+
+				<p style="font-size:22px;margin:0 0 0 0;color: #002e36 !important;">@Model.CategoriesProductViewModel[c].ProductCategory.CategoryName.ToUpper()</p>
+				@if (c == 0)
+				{
+					<div style="height:5px;width:100%;margin-top:2px;margin-bottom:5px;background-color:#82D8E3"></div>
+
+				}
+				@if (c == 1)
+				{
+					<div style="height:5px;width:100%;margin-top:2px;margin-bottom:5px;background-color:#ADE422 !important"></div>
+
+				}
+				@if (c == 2)
+				{
+					<div style="height:5px;width:100%;margin-top:2px;margin-bottom:5px;background-color:#FFA724"></div>
+
+				}
+				@if (c == 3)
+				{
+					<div style="height:5px;width:100%;margin-top:2px;margin-bottom:10px;background-color:#FF5252 !important"></div>
+				}
+
+
+				@if (c != 3)
+				{
+					<div style="margin:0 0 0 0;padding:0 0 0 0">
+						<p style="font-size:15px;color: #002e36 !important;width: 230px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">@Model.CategoriesProductViewModel[c].ProductCategory.CategoryDescription</p>
+					</div>
+
+					<div style="margin:0 0 0 0;padding:0 0 0 0">
+						<img src="~/Peruploads/coverpics/@Model.CategoriesProductViewModel[c].ProductCategory.ImagePath" style="height:200px;width:225px;vertical-align: middle;">
+					</div>
+				}
+				else
+				{
+					<div>
+						<img src="~/Peruploads/coverpics/dhamaka.png" style="height:222px;max-width:220px">
+					</div>
+
+				}
+
+
+
+			</div>
+		</a>
+	}
+</div>
+@for (int a1 = 4; a1 < Model.CategoriesProductViewModel.Count; a1++)
+{
+	if (a1 != 0)
+	{
+		<div class="container divider" style="height:1px;width:100%;background-color:lightgray;margin:0 0 0 0"></div>
+	}
+
+	<div class="badge" style="margin:0 0 15px 0;height:306px;width:100%;background-color:white;padding:15px 20px 0 20px;box-sizing: border-box;">
+		<div class="name-cover" style="margin:0 0 5px 0;height:20px;width:100%;padding:0 0 0 5px">
+			<p style="color:#444!important;font-size: 20px;line-height: 1;font-weight:400;float:left;margin:0 0 0 0;padding:0 0 0 0">@Model.CategoriesProductViewModel[a1].ProductCategory.CategoryDescription  <a style="font-size: 18px;padding:0 0 0 10px;" href="~/Products/ShowProductsByCategory/@Model.CategoriesProductViewModel[a1].ProductCategory.Id">See more</a>  </p>
+		</div>
+
+		@for (int a = 0; a < 5; a++)
+		{
+			<a href="/Products/ShowProduct/@Model.CategoriesProductViewModel[a1].Products[a].ProductId">
+				<div style="height:280px;width:235px;background-color:white;margin:0 0 0 0;padding:0 5px 5px 5px;float:left">
+
+					<div>
+						<img src="~/Peruploads/@Model.CategoriesProductViewModel[a1].Products[a].Image[0].ImagePath" style="height:222px;max-width:220px">
+					</div>
+					<div>
+						<p style="font-size:18px;margin:0 0 0 0;color:#0066c0">@Model.CategoriesProductViewModel[a1].Products[a].ProductName</p>
+						<p style="color:firebrick;font-size:14px;margin:0 0 0 0;padding:0 0 0 0">Price: Rs @{@Model.CategoriesProductViewModel[a1].Products[a].ProductPrice}</p>
+							</div>
+						</div>
+					</a>
+		}
+		<br>
+
+	</div>
+}
+
+
+
+	@section scripts{
+
+		<script>
+			var myIndex = 0;
+			var myVar;
+			carousel();
+
+			function carousel() {
+				var i;
+				var x = document.getElementsByClassName("mySlides");
+				for (i = 0; i < x.length; i++) {
+					x[i].style.display = "none";
+				}
+				myIndex++;
+				if (myIndex > x.length) { myIndex = 1 }
+				x[myIndex - 1].style.display = "block";
+				myVar = setTimeout(carousel, 4000); // Change image every 2 seconds
+			}
+
+			var slideIndex = 1;
+			showDivs(slideIndex);
+
+			function plusDivs(n) {
+				clearTimeout(myVar);
+				showDivs(slideIndex += n);
+			}
+
+			function showDivs(n) {
+				var i;
+				var x = document.getElementsByClassName("mySlides");
+				if (n > x.length) { slideIndex = 1 }
+				if (n < 1) { slideIndex = x.length }
+				for (i = 0; i < x.length; i++) {
+					x[i].style.display = "none";
+				}
+				x[slideIndex - 1].style.display = "block";
+			}
+		</script>
+	}

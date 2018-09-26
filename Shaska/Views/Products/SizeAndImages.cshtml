@@ -1,0 +1,143 @@
+﻿@model Shaska.Models.Product
+@{
+    ViewBag.Title = "SizeAndImages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="padding-left:15px;height:450px">
+    <h2>Product Sizes</h2>
+    @using (Html.BeginForm("UploadImages", "Products", new { id = "finishform" }))
+    {
+
+        //-------- FOR SHIRT -------------
+
+        if (Model.ProductCategoryId == 1)
+        {
+            for (int a = 0; a < Model.Size.Count; a++)
+            {
+
+                if (a == 0)
+                {
+                    Model.Size[a].Sixe = "Large";
+                }
+
+                else if (a == 1)
+                {
+                    Model.Size[a].Sixe = "Small";
+                }
+
+                else if (a == 2)
+                {
+                    Model.Size[a].Sixe = "Medium";
+                }
+                var count = a + 1;
+                <h4>@count.</h4>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Size[a].Sixe)
+                    @Html.TextBoxFor(m => Model.Size[a].Sixe, new { @class = "form-control" })
+                    <br>
+                    @Html.LabelFor(m => m.Size[a].Stock)
+                    @Html.TextBoxFor(m => Model.Size[a].Stock, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Size[a].Sixe)
+                    @Html.ValidationMessageFor(m => m.Size[a].Stock)
+                </div>
+            }
+        }
+
+
+      //-------- FOR PANT -------------
+
+        else if (Model.ProductCategoryId == 2)
+        {
+
+
+            for (int a = 0; a < Model.Size.Count; a++)
+            {
+                var count = a + 1;
+                <h4>@count.</h4>
+
+                var sixeno = a + 24;
+
+                Model.Size[a].Sixe = "Size " + sixeno;
+
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Size[a].Sixe)
+                    @Html.TextBoxFor(m => m.Size[a].Sixe, new { @class = "form-control" })
+                    <br>
+                    @Html.LabelFor(m => m.Size[a].Stock)
+                    @Html.TextBoxFor(m => m.Size[a].Stock, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Size[a].Sixe)
+                    @Html.ValidationMessageFor(m => m.Size[a].Stock)
+                </div>
+
+            }
+        }
+
+      //-------- FOR SHOES -------------
+
+        else if (Model.ProductCategoryId == 3)
+        {
+
+            for (int a = 0; a < Model.Size.Count; a++)
+            {
+                var count = a + 1;
+                <h4>@count.</h4>
+
+                var sixeno = a + 6;
+
+                Model.Size[a].Sixe = "Size " + sixeno;
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Size[a].Sixe)
+                    @Html.TextBoxFor(m => m.Size[a].Sixe, new { @class = "form-control" })
+                    <br>
+                    @Html.LabelFor(m => m.Size[a].Stock)
+                    @Html.TextBoxFor(m => m.Size[a].Stock, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Size[a].Sixe)
+                    @Html.ValidationMessageFor(m => m.Size[a].Stock)
+                </div>
+            }
+        }
+
+     //-------- FOR OTHERS -------------
+
+        else
+        {
+
+            for (int a = 0; a < Model.Size.Count; a++)
+            {
+                var count = a + 1;
+                <h4>@count.</h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Size[a].Sixe)
+                    @Html.TextBoxFor(m => m.Size[a].Sixe, new { @class = "form-control" })
+                    <br>
+                    @Html.LabelFor(m => m.Size[a].Stock)
+                    @Html.TextBoxFor(m => m.Size[a].Stock, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Size[a].Sixe)
+                    @Html.ValidationMessageFor(m => m.Size[a].Stock)
+                </div>
+            }
+        }
+
+        @Html.HiddenFor(m => m.ProductId)
+        @Html.HiddenFor(m => m.ProductCategoryId)
+
+        @Html.HiddenFor(m => m.ProductName)
+        @Html.HiddenFor(m => m.Manufacturer)
+        @Html.HiddenFor(m => m.ProductPrice)
+        @Html.HiddenFor(m => m.ProductDate)
+        @Html.HiddenFor(m => m.NoOfSizes)
+
+        @Html.AntiForgeryToken()
+        for (int a = 0; a < Model.Size.Count; a++)
+        {
+            @Html.HiddenFor(m => m.Size[a].Sixe)
+            @Html.HiddenFor(m => m.Size[a].ProductId)
+        }
+
+        <button type="submit" class="btn-primary btn" id="finish">Next</button>
+    }
+</div>

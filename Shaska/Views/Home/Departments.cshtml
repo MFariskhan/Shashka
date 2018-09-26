@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Departments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="padding-left:15px">Departments</h2>
+
+@for (int a1 = 0; a1 < Model.CategoriesProductViewModel.Count; a1++)
+{
+    if (a1 != 0)
+    {
+        <div class="container divider" style="height:1px;width:100%;background-color:lightgray;margin:0 0 0 0"></div>
+    }
+
+    <div class="badge" style="margin:0 0 15px 0;height:306px;width:100%;background-color:white;padding:15px 20px 0 20px;box-sizing: border-box;">
+        <div class="name-cover" style="margin:0 0 5px 0;height:20px;width:100%;padding:0 0 0 5px">
+            <p style="color:#444!important;font-size: 20px;line-height: 1;font-weight:400;float:left;margin:0 0 0 0;padding:0 0 0 0">@Model.CategoriesProductViewModel[a1].ProductCategory.CategoryName  <a style="font-size: 18px;padding:0 0 0 10px;" href="~/Products/ShowProductsByCategory/@Model.CategoriesProductViewModel[a1].ProductCategory.Id">See more</a>  </p>
+        </div>
+
+        @for (int a = 0; a < 5; a++)
+        {
+            <a href="/Products/ShowProduct/@Model.CategoriesProductViewModel[a1].Products[a].ProductId">
+                <div style="height:280px;width:235px;background-color:white;margin:0 0 0 0;padding:0 5px 5px 5px;float:left">
+
+                    <div>
+                        <img src="~/Peruploads/@Model.CategoriesProductViewModel[a1].Products[a].Image[0].ImagePath" style="height:222px;max-width:220px">
+                    </div>
+                    <div>
+                        <p style="font-size:18px;margin:0 0 0 0;color:#0066c0">@Model.CategoriesProductViewModel[a1].Products[a].ProductName</p>
+                        <p style="color:firebrick;font-size:14px;margin:0 0 0 0;padding:0 0 0 0">Price: Rs @{@Model.CategoriesProductViewModel[a1].Products[a].ProductPrice}</p>
+                    </div>
+                </div>
+            </a>
+        }
+        <br>
+
+    </div>
+}

@@ -1,0 +1,69 @@
+﻿@model  IEnumerable<Shaska.Models.ApplicationUser>
+@{
+    ViewBag.Title = "ShowUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+
+
+<table id="customers" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+           var table= $("#customers").DataTable({
+                ajax: {
+                    url:"/api/customers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "firstName",
+                        render: function (data,type, registerViewModel) {
+                            return "<p>" + registerViewModel.firstName+" "+registerViewModel.lastName+ "</p>";
+                        }
+                    },
+                    {
+                        data: "email"
+                    },
+                    {
+                        data: "id",
+                      render: function (data) {
+                           return "<button class='btn-link js-delete' data-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
+
+            $("#customers").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to remove this customer?", function (result) {
+
+                    if (result) {
+                        $.ajax({
+                           url: "/api/customers/" + button.attr("data-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+
+                        });
+                    }
+                });
+
+            });
+
+        });
+    </script>
+
+}

@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<style>
+    .footer {
+        height: 270px;
+        background-color: #414141;
+        width: 100%;
+        text-align: left;
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 50px;
+        margin: 50px 0 0 0;
+    }
+
+        .footer .footer-left,
+        .footer .footer-center,
+        .footer .footer-right {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+
+        /* footer left*/
+
+        .footer .footer-left {
+            width: 33%;
+            padding-right: 15px;
+        }
+
+        .footer .about {
+            line-height: 20px;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+            .footer .about span {
+                display: block;
+                color: #ffffff;
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+
+        .footer .icons {
+            margin-top: 25px;
+        }
+
+            .footer .icons a {
+                display: inline-block;
+                width: 35px;
+                height: 35px;
+                cursor: pointer;
+                background-color: #33383b;
+                border-radius: 2px;
+                font-size: 20px;
+                color: #ffffff;
+                text-align: center;
+                line-height: 35px;
+                margin-right: 3px;
+                margin-bottom: 5px;
+            }
+
+
+        /* footer center*/
+
+        .footer .footer-center {
+            width: 30%;
+        }
+
+            .footer .footer-center i {
+                background-color: #33383b;
+                color: #ffffff;
+                font-size: 25px;
+                width: 38px;
+                height: 38px;
+                border-radius: 50%;
+                text-align: center;
+                line-height: 42px;
+                margin: 10px 15px;
+                vertical-align: middle;
+            }
+
+                .footer .footer-center i.fa-envelope {
+                    font-size: 17px;
+                    line-height: 38px;
+                }
+
+            .footer .footer-center p {
+                display: inline-block;
+                color: #ffffff;
+                vertical-align: middle;
+                margin: 0;
+            }
+
+                .footer .footer-center p span {
+                    display: block;
+                    font-weight: normal;
+                    font-size: 14px;
+                    line-height: 2;
+                }
+
+                .footer .footer-center p a {
+                    color: #0099ff;
+                    text-decoration: none;
+                }
+
+
+        /* footer right*/
+
+        .footer .footer-right {
+            width: 35%;
+        }
+
+        .footer h3 {
+            color: #ffffff;
+            font-size: 30px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+            .footer h3 span {
+                color: #0099ff;
+            }
+
+        .footer .menu {
+            color: #ffffff;
+            margin: 20px 0 12px;
+            padding: 0;
+        }
+
+            .footer .menu a {
+                display: inline-block;
+                line-height: 1.8;
+                text-decoration: none;
+                color: inherit;
+            }
+
+                .footer .menu a:hover {
+                    color: #0099ff;
+                }
+
+        .footer .name {
+            color: #0099ff;
+            font-size: 14px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+    @@media (max-width: 767px) {
+        .footer {
+            font-size: 14px;
+        }
+
+            .footer .footer-left,
+            .footer .footer-center,
+            .footer .footer-right {
+                display: block;
+                width: 100%;
+                margin-bottom: 40px;
+                text-align: center;
+            }
+
+                .footer .footer-center i {
+                    margin-left: 0;
+                }
+    }
+
+    }
+    }
+</style>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+</head>
+
+
+
+
+<body >
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class ="navbar-brand" style="font-size:26px;color:green"><i>Shashka</i></a>
+              <!--  Html.ActionLink("Shashka", "Index", "Home", new { area = "" }, new { class = "navbar-brand" })-->
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Departments", "Departments", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="width:100%;padding-left:0;padding-right:0;">
+        @RenderBody()
+       <footer>
+        <div class="footer">
+            <div class="footer-left col-md-4 col-sm-6">
+                <p class="about">
+                    <span>
+                        About the company
+                    </span>     Our team of corporate merchandising and technology professionals design and develop custom branded merchandise e-stores.Shashka online company store can be designed to support multiple audiences, from employees and customers to distributors and partners.
+                </p>
+                <div class="icons">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-center col-md-4 col-sm-6">
+                <div>
+                    <i class="fa fa-map-marker"></i>
+                    <p><span>North Nazimabad</span> Karachi, Pakistan</p>
+                </div>
+                <div>
+                    <i class="fa fa-phone"></i>
+                    <p> 03339080602</p>
+                </div>
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p><a href="#"> office@company.com</a></p>
+                </div>
+            </div>
+            <div class="footer-right col-md-4 col-sm-6">
+                <h3> <b> <i>   SHASHKA<span> ONLINE STORE</span></h3>
+                <p class="menu">
+                    <a href="#"> Home</a> |
+                    <a href="#"> About</a> |
+                    <a href="#"> Services</a> |
+                    <a href="#"> Portfolio</a> |
+                    <a href="#"> News</a> |
+                    <a href="#"> Contact</a>
+                </p>
+                <p class="name"> Company Name &copy; 2017</p>
+            </div>
+
+        </div>
+           </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/lib")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

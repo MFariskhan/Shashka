@@ -1,0 +1,52 @@
+﻿@model Shaska.ViewModel.OrderCustomerViewModel
+@{
+    ViewBag.Title = "ConfirmOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-group">
+    <h2 style="color:blue;text-align:center">Hi @Model.Name!</h2>
+</div>
+
+<div class="form-group">
+    <h4 style="color:blue">Please follow few steps to confirm your order</h4>
+</div>
+
+<div class="form-group">
+    <p style="">Your Email: @Model.Email</p>
+    <h4 style="">Items:</h4>
+    <ol>
+        @foreach (var name in Model.ProductNames)
+        {
+            <li style="">@name</li>
+        }
+    </ol>
+    <p style="">Your Total Amount =@Model.Prize</p>
+
+</div>
+@using (Html.BeginForm("Save", "Orders"))
+{
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address)
+        @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Address)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.PhoneNumber)
+    </div>
+    @Html.AntiForgeryToken();
+    <button type="submit" class="btn btn-primary">Done</button>
+
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

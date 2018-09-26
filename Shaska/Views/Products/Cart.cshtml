@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Shaska.Models.Cart>
+    @{
+        ViewBag.Title = "Cart";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Cart</h2>
+
+@using (Html.BeginForm("ConfirmOrders", "Orders")) 
+{ 
+        <div class="form-group">
+            <table id="carts" class="table table-bordered table-hover">
+
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Product Price</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div>
+            <button type="submit" class="btn-primary btn" style="width:200px;color:white;background-color:red">Confirm Orders</button>
+        </div>
+    }
+    @section scripts
+    {
+        <script>
+            $(document).ready(function () {
+                var table = $("#carts").DataTable({
+                    ajax: {
+                        url: "/api/cart",
+                        dataSrc: ""
+                    },
+                    columns: [
+                        {
+                            data: "product.productName",
+                            render: function (data, type, cart) {
+                                return "<a href='/products/showProduct/" + cart.productId + "'>" + cart.product.productName + "</a>";
+                            }
+                        },
+                        {
+                            data: "quantity",
+
+                        },
+                        {
+                            data: "product.productPrice",
+                            render: function (data, type, cart) {
+                                return "<h1 style=\"color:blue\">" + cart.product.productPrice + "</h1>";
+                            }
+
+                        },
+                        {
+                            data: "id",
+                            render: function (data) {
+                                return "<button type=\"button\" class='btn-link js-delete' data-id=" + data + ">Delete</button>";
+                            }
+                        }
+                    ]
+                });
+                $("#carts").on("click", ".js-delete", function () {
+                    var button = $(this);
+                    bootbox.confirm("Are you sure you want to remove this product from your cart?", function (result) {
+
+                        if (result) {
+                            $.ajax({
+                                url: "/api/cart/" + button.attr("data-id"),
+                                method: "DELETE",
+                                success: function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                }
+
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+    }

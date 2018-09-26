@@ -1,0 +1,48 @@
+﻿@model Shaska.Models.Product
+@{
+    ViewBag.Title = "ProductForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="padding-left:15px;;height:450px">
+    <h2>ProductForm</h2>
+
+
+    @using (Html.BeginForm("SizeAndImages", "Products"))
+    {
+        //  @Html.ValidationSummary(true, "Please fix the following errors.")
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ProductName)
+            @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ProductName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ProductPrice)
+            @Html.TextBoxFor(m => m.ProductPrice, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ProductPrice)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Manufacturer)
+            @Html.TextBoxFor(m => m.Manufacturer, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Manufacturer)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.NoOfSizes)
+            @Html.TextBoxFor(m => m.NoOfSizes, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.NoOfSizes)
+        </div>
+
+
+        @Html.HiddenFor(m => m.ProductId)
+        @Html.HiddenFor(m => m.ProductCategoryId)
+        @Html.HiddenFor(m => m.ProductDate)
+
+        @Html.AntiForgeryToken()
+
+        <button type="submit" class="btn btn-primary">Next</button>
+
+    }
+    </div>

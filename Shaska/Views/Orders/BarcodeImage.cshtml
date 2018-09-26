@@ -1,0 +1,40 @@
+﻿@{
+	ViewBag.Title = "Home";
+	//Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .modal-backdrop {
+        /*opacity: 1.0 !important;*/
+    }
+    </style>
+<div id="myModal"  class="modal" data-backdrop="static" data-keyboard="false" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">QR Code Generated Against The Order Number</h5>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>*@
+            </div>
+            <div class="modal-body">
+                <div class="col text-center">
+                <img src="~/Images/Order Barcodes/@ViewBag.Barcode" class="center" style="height:300px;margin:0px auto">
+                    </div>
+                @*<p>Modal body text goes here.</p>*@
+            </div>
+            <div class="modal-footer">
+                <a  href="/Orders/Index" class="btn btn-primary" >Back to Orders</a>
+                <button type="button" class="btn btn-primary">Print Barcode </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+    $(document).ready(function () {
+        $('#myModal').modal('show'); 
+       
+    });
+    </script>
+    }

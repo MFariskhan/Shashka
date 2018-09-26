@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:red">Orders</h2>
+
+<table id="orders" class="table table-bordered table-hover">
+<thead>
+    <tr>
+        <th>Customer Name</th>
+        <th>Product Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+        <th>Status</th>
+       
+    </tr>
+</thead>
+<tbody></tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+           var table= $("#orders").DataTable({
+                ajax: {
+                    url:"/api/orders",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "applicationUser.firstName",
+                        render: function (data, type, order) {
+                            return "<a href='/orders/details/" + order.applicationUser.id + "'>" + order.applicationUser.firstName+" "+order.applicationUser.lastName + "</a>";
+                        }
+                        
+                    },
+                    {
+                        data: "product.productName"
+                    },
+                     {
+                         data: "address"
+                     },
+                     {
+                         data: "phoneNumber"
+                     },
+                      {
+                          data: "status"
+                      },
+                  
+                ]
+            });
+
+         
+
+        });
+    </script>
+
+}

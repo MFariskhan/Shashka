@@ -1,0 +1,184 @@
+﻿@model Shaska.Models.Product
+@{
+    ViewBag.Title = "ShowProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("AddProductToCart", "Products"))
+{
+
+    <div class="row" style="width:95%;height:100%;margin: 0 15px 0 15px;padding:0 0 0 0">
+
+        <div id="Heading">
+            <h3 style="margin:8px 0 8px 0;padding:0 0 0 0">@Model.ProductName</h3>
+        </div>
+
+        <div class="col" id="Image" style="height:100%;width:30%;float:left;padding:0 0 0 0;margin:0 0 0 0">
+
+
+            @if (Model.Image.Count > 0 && Model.Image[0] != null)
+            {
+                <div class="form-group" style="">
+                    @for (int a = 0; a < Model.Image.Count; a++)
+                    {
+
+                        <img class="mySlides" id="img1" src="~/Peruploads/@Model.Image[a].ImagePath" style="height:500px;width:100%;padding:0 0 0 0">
+                    }
+
+                    <button type="button" class="btn" style="position:absolute; top:55%;left:1.3%;border:solid 1px" onclick="plusDivs(-1)">&#10094;</button>
+                    <button type="button" class="btn" style="position:absolute;top:55%;left:27%;border:solid 1px" onclick="plusDivs(1)">&#10095;</button>
+                </div>
+            }
+
+
+
+        </div>
+
+
+
+        <div class="col" id="Description" style="height:100%;width:50%;float:left;margin:0 0 0 0;padding:0 10px 0 10px">
+            <div class="form-group">
+                <h3 style="color: #555!important;">Product description</h3>
+            </div>
+
+            <div class="form-group">
+                <h4 style="color: #555!important;">Munufactured by @Model.Manufacturer:</h4>
+            </div>
+
+            <div class="form-group">
+                <h4 style="color:firebrick;">Price: Rs @Model.ProductPrice</h4>
+            </div>
+
+            <div class="form-group">
+                <h4 style="color: #555!important;">Size:</h4>
+            </div>
+
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.NoOfSizes, new SelectList(Model.Size, "Id", "Sixe"), "Select", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <h4 style="color: #555!important;">Color:</h4>
+            </div>
+
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.NoOfSizes, new SelectList(Model.Size, "Id", "Sixe"), "Select", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <h4 style="color: #555!important;">Policies:</h4>
+            </div>
+            <div class="list-group">
+                <ul>
+                    <li>Free Return on some sizes and colors</li>
+                    <li>Padded For Comfort</li>
+                    <li>No Shipping Charges</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col" style="height:100%;width:20%;margin:0 0 0 0;float:left">
+            @Html.HiddenFor(m => m.ProductId)
+            @Html.HiddenFor(m => m.ProductCategoryId)
+
+            <div class="form-group">
+                <h4 style="color: #555!important;">Quantity:</h4>
+            </div>
+
+            <div class="form-group" style="width:60px">
+                @{
+    Model.NoOfSizes = 0;
+                }
+                @Html.DropDownListFor(m => m.NoOfSizes, new SelectList(new List<int> { 1,2,3,4}), "0", new { @class = "form-control" })
+            </div>
+
+            <div>
+                <button type="submit" class="btn-primary btn" style="width:200px;background: #f0c14b;border:solid 1px black;color:black">Add To Cart</button>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+@section scripts{
+    <script>
+
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = x.length }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
+        }
+
+        $(document).ready(function () {
+            /*
+            var id = "";
+            //var a = $('#Root').find('#Image').find('.mulg');
+            //alert(a);
+            var ele = document.getElementsByClassName('test');
+            //.getElementById('#Image').getElementById('#img').getElementsByClassName('test');
+            for (var a = 0; a < ele.length; a++) {
+                var id = ele[a].id+a;
+                $(ele[a]).click(function () {
+                    alert(a);
+                });
+                id = ele[a].id;
+                alert(ele[a].id);
+
+            }
+
+            $('#Root').find('#Image').find('#ih').click(function () {
+                alert("aak");
+                //       $("#test").hide();
+
+            });
+
+            $('#Root').find('#Image').find('#img').find('#img1').click(function () {
+                alert("aak");
+                //       $("#test").hide();
+
+            });
+
+
+
+            */
+            //for (i = 0; i < childDivs.length; i++) {
+            //  var childDiv = childDivs[i];
+            //   childDivs.click(function () {
+            //     alert("aak");
+            //  $('#Root').find('#Image').find('#Img').attr("src", "~/Peruploads/311");
+
+            //   });
+
+            //}
+
+            /* $('#Root').find('#Image').find('#img').each(function () {
+            var img = $(this).valueOf('data-id');
+                alert(img);
+                var imgsrc = $img.attr('src');
+                $img.click(function () {
+                    alert("aak");
+                    $('#Root').find('#Image').find('#Img').attr("src", "~/Peruploads/311");
+
+                });
+            });
+
+       //     $('#Root').find('#Image').find('#img')('background-color', '#ffa')(function () {
+         //       $("#test").hide();
+           // });*/
+
+        });
+
+    </script>
+}
